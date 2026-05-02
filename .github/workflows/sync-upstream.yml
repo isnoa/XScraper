@@ -44,6 +44,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
           branch: sync/upstream-${{ github.run_number }}
           delete-branch: true
           title: 'chore: sync upstream'
