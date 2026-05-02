@@ -67,6 +67,7 @@ export interface Tweet {
   isSelfThread?: boolean;
   likes?: number;
   name?: string;
+  verifiedType?: string;
   mentions: Mention[];
   permanentUrl?: string;
   photos: Photo[];

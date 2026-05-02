@@ -122,6 +122,7 @@ export function parseLegacyTweet(
   user?: Readonly<LegacyUserRaw>,
   tweet?: Readonly<LegacyTweetRaw>,
   editControl?: Readonly<EditControlInitialRaw>,
+  userResult?: any,
 ): ParseTweetResult {
   if (tweet == null) {
     return {
@@ -174,6 +175,7 @@ export function parseLegacyTweet(
       name: mention.name,
     })),
     name: name,
+    verifiedType: userResult?.verification?.verified_type,
     permanentUrl: `https://x.com/${username}/status/${tweetId}`,
     photos,
     replies: tweet.reply_count,
@@ -270,6 +272,7 @@ function parseResult(result?: TimelineResultRaw): ParseTweetResult {
     result?.core?.user_results?.result?.legacy,
     result?.legacy,
     result?.edit_control?.edit_control_initial,
+    result?.core?.user_results?.result,
   );
   if (!tweetResult.success) {
     return tweetResult;

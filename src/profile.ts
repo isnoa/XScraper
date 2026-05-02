@@ -43,6 +43,7 @@ export interface LegacyUserRaw {
   protected?: boolean;
   screen_name?: string;
   verified?: boolean;
+  verified_type?: string;
   has_custom_timelines?: boolean;
   has_extended_profile?: boolean;
   url?: string;
@@ -102,6 +103,7 @@ export interface Profile {
   isPrivate?: boolean;
   isVerified?: boolean;
   isBlueVerified?: boolean;
+  verifiedType?: string;
   joined?: Date;
   likesCount?: number;
   listedCount?: number;
@@ -126,6 +128,10 @@ export interface UserRaw {
         rest_id?: string;
         is_blue_verified?: boolean;
         legacy: LegacyUserRaw;
+        verification?: {
+          verified?: boolean;
+          verified_type?: string;
+        };
         core?: CoreUserRaw;
         avatar?: {
           image_url?: string;
@@ -133,6 +139,8 @@ export interface UserRaw {
         location?: {
           location?: string;
         };
+        verification_info?: any;
+        business_account?: any;
       };
     };
   };
@@ -146,6 +154,7 @@ function getAvatarOriginalSizeUrl(avatarUrl: string | undefined) {
 export function parseProfile(
   legacy: LegacyUserRaw,
   isBlueVerified?: boolean,
+  userResult?: any,
 ): Profile {
   const profile: Profile = {
     avatar: getAvatarOriginalSizeUrl(legacy.profile_image_url_https),
@@ -167,6 +176,8 @@ export function parseProfile(
     userId: legacy.id_str,
     username: legacy.screen_name,
     isBlueVerified: isBlueVerified ?? false,
+    verifiedType:
+      userResult?.verification?.verified_type || legacy.verified_type,
     canDm: legacy.can_dm,
   };
 
@@ -254,7 +265,7 @@ export async function getProfile(
 
   return {
     success: true,
-    value: parseProfile(legacy, user.is_blue_verified),
+    value: parseProfile(legacy, user.is_blue_verified, user),
   };
 }
 

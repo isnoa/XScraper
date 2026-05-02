@@ -1,0 +1,51 @@
+name: Sync Upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Merge upstream changes
+        env:
+          UPSTREAM_REPOSITORY: ${{ vars.UPSTREAM_REPOSITORY }}
+          UPSTREAM_BRANCH: ${{ vars.UPSTREAM_BRANCH || 'main' }}
+        run: |
+          set -e
+
+          if [ -z "$UPSTREAM_REPOSITORY" ]; then
+            echo "Set repository variable UPSTREAM_REPOSITORY to your upstream repo, for example owner/repo."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git remote add upstream "https://github.com/${UPSTREAM_REPOSITORY}.git"
+          git fetch upstream "$UPSTREAM_BRANCH"
+
+          git checkout -B sync/upstream
+          git merge --no-edit "upstream/${UPSTREAM_BRANCH}"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: sync/upstream
+          title: "chore: sync upstream"
+          commit-message: "chore: sync upstream"
+          body: |
+            Automated upstream sync.
+
+            Update the repository variables if the upstream repository or branch changes.

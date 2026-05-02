@@ -74,6 +74,7 @@ export function parseRelationshipTimeline(
             const profile = parseProfile(
               userResultRaw.legacy,
               userResultRaw.is_blue_verified,
+              userResultRaw,
             );
 
             if (!profile.userId) {
