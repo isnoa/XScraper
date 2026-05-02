@@ -40,6 +40,9 @@ jobs:
           git checkout -B "sync/upstream-${{ github.run_number }}"
           git merge --no-edit "upstream/${UPSTREAM_BRANCH}"
 
+          # Push the new branch to origin so create-pull-request can reference origin/<branch>
+          git push --set-upstream origin "sync/upstream-${{ github.run_number }}"
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:
