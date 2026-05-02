@@ -43,8 +43,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: sync/upstream
-          title: "chore: sync upstream"
-          commit-message: "chore: sync upstream"
+          title: 'chore: sync upstream'
+          commit-message: 'chore: sync upstream'
           body: |
             Automated upstream sync.
 
