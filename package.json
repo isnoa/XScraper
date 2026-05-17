@@ -1,13 +1,13 @@
 {
-  "name": "@the-convocation/twitter-scraper",
-  "description": "A port of n0madic/twitter-scraper to Node.js.",
+  "name": "@isnoa/xscraper",
+  "description": "A port of n0madic/twitter-scraper to Node.js with custom updates.",
   "keywords": [
     "x",
     "twitter",
     "scraper",
     "crawler"
   ],
-  "version": "0.22.3",
+  "version": "1.0.0",
   "main": "dist/default/cjs/index.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
@@ -28,8 +28,8 @@
       "require": "./dist/cycletls/cjs/index.cjs"
     }
   },
-  "repository": "https://github.com/the-convocation/twitter-scraper.git",
-  "author": "karashiiro <49822414+karashiiro@users.noreply.github.com>",
+  "repository": "https://github.com/isnoa/XScraper.git",
+  "author": "isnoa",
   "license": "MIT",
   "engines": {
     "node": ">=16"
@@ -37,6 +37,7 @@
   "packageManager": "yarn@1.22.19",
   "scripts": {
     "build": "rimraf dist && rollup -c",
+    "prepublishOnly": "yarn build",
     "commit": "cz",
     "docs:generate": "typedoc --options typedoc.json",
     "docs:deploy": "yarn docs:generate && gh-pages -d docs",
