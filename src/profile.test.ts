@@ -33,6 +33,7 @@ test('scraper can get profile', async () => {
   expect(actual.location).toEqual(expected.location);
   expect(actual.name).toEqual(expected.name);
   expect(actual.pinnedTweetIds).toEqual(expected.pinnedTweetIds);
+  expect(actual.verified_type).toEqual(expected.verifiedType);
   expect(actual.url).toEqual(expected.url);
   expect(actual.userId).toEqual(expected.userId);
   expect(actual.username).toEqual(expected.username);
@@ -71,6 +72,7 @@ test('scraper can get profile without logging in', async () => {
   expect(actual.location).toEqual(expected.location);
   expect(actual.name).toEqual(expected.name);
   expect(actual.pinnedTweetIds).toEqual(expected.pinnedTweetIds);
+  expect(actual.verified_type).toEqual(expected.verifiedType);
   expect(actual.url).toEqual(expected.url);
   expect(actual.userId).toEqual(expected.userId);
   expect(actual.username).toEqual(expected.username);
@@ -108,6 +110,7 @@ test('scraper can get partial private profile', async () => {
   expect(actual.location).toEqual(expected.location);
   expect(actual.name).toEqual(expected.name);
   expect(actual.pinnedTweetIds).toEqual(expected.pinnedTweetIds);
+  expect(actual.verified_type).toEqual(expected.verifiedType);
   expect(actual.url).toEqual(expected.url);
   expect(actual.userId).toEqual(expected.userId);
   expect(actual.username).toEqual(expected.username);

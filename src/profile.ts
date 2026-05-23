@@ -110,6 +110,7 @@ export interface Profile {
   location?: string;
   name?: string;
   pinnedTweetIds?: string[];
+  verified_type?: string;
   tweetsCount?: number;
   url?: string;
   userId?: string;
@@ -171,6 +172,8 @@ export function parseProfile(
     location: legacy.location,
     name: legacy.name,
     pinnedTweetIds: legacy.pinned_tweet_ids_str,
+    verified_type:
+      userResult?.verification?.verified_type || legacy.verified_type,
     tweetsCount: legacy.statuses_count,
     url: `https://x.com/${legacy.screen_name}`,
     userId: legacy.id_str,

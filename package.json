@@ -7,7 +7,7 @@
     "scraper",
     "crawler"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/default/cjs/index.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
